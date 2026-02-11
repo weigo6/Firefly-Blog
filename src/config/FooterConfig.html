@@ -1,0 +1,31 @@
+<div id="pv-stats">
+  正在加载访问数据...
+</div>
+
+<script>
+  async function displayPageViews() {
+    const path = window.location.pathname;
+    const apiUrl = `https://eocount.9420000.xyz/api/visit?url=${encodeURIComponent(path)}`;
+
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      const { total, page } = await response.json();
+      const format = (n) => new Intl.NumberFormat().format(n);
+
+      document.getElementById('pv-stats').innerHTML = 
+        `本站总访问量：${format(total)} 次 &nbsp; | &nbsp;
+         当前页阅读量：${format(page)} 次`;
+    } catch (err) {
+      console.warn('⚠️ 无法加载访问量数据:', err);
+      document.getElementById('pv-stats').innerHTML = '访问量统计暂时不可用';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', displayPageViews);
+  } else {
+    displayPageViews();
+  }
+</script>
