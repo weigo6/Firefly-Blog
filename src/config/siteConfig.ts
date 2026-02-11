@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
 	title: "河洲拾光",
 
 	// 站点副标题
-	subtitle: "Demo site",
+	subtitle: "观水听风",
 
 	// 站点 URL
 	site_url: "https://009420.xyz",
